@@ -13,12 +13,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     private configService: ConfigService,
     @InjectModel(User.name) private userModel: Model<User>,
   ) {
-    console.log('passed here');
     const secretKey = configService.get<string>('JWT_SECRET');
     if (!secretKey) {
       throw new Error('JWT_SECRET is not defined');
     }
-    console.log('secretKey:', secretKey);
 
     super({
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
@@ -29,7 +27,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    console.log('payload:', payload);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { id } = payload;
     console.log('id:', id);
