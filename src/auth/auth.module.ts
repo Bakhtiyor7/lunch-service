@@ -6,22 +6,29 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/user/schema/user.schema';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
-    JwtModule.registerAsync({
-      imports: [ConfigModule], // Import ConfigModule to use ConfigService
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET'),
-        signOptions: { expiresIn: '1d' },
-      }),
-    }),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    ConfigModule,
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        const secret = configService.get<string>('JWT_SECRET');
+        if (!secret) {
+          throw new Error('JWT_SECRET is not defined in environment variables');
+        }
+        return {
+          secret,
+          signOptions: { expiresIn: '1d' },
+        };
+      },
+    }),
   ],
-
-  providers: [AuthService, UserService, JwtService],
+  providers: [AuthService, UserService, JwtStrategy], // Add JwtStrategy
   controllers: [AuthController],
-  exports: [JwtModule],
+  exports: [JwtStrategy], // Export if needed elsewhere
 })
 export class AuthModule {}
