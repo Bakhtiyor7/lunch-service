@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { AdminController } from './admin.controller';
 import { MongooseModule } from '@nestjs/mongoose';
+
+import { UserModule } from 'src/user/user.module';
+import { User, UserSchema } from 'src/user/schema/user.schema';
 import {
   ProductPolicy,
   ProductPolicySchema,
-} from 'src/products/schema/product-policy.schema';
-import { UserModule } from 'src/user/user.module';
-import { User, UserSchema } from 'src/user/schema/user.schema';
+} from 'src/product/schema/product-policy.schema';
 
 @Module({
   imports: [

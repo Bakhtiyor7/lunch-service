@@ -1,8 +1,8 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ProductPolicyDto } from 'src/products/dto/product-policy.dto';
-import { ProductPolicy } from 'src/products/schema/product-policy.schema';
+import { ProductPolicyDto } from 'src/product/dto/product-policy.dto';
+import { ProductPolicy } from 'src/product/schema/product-policy.schema';
 import { User } from 'src/user/schema/user.schema';
 
 @Injectable()

@@ -10,8 +10,9 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AdminService } from './admin.service';
-import { ProductPolicyDto } from 'src/products/dto/product-policy.dto';
+
 import { ServiceException } from 'src/error/serviceException.error';
+import { ProductPolicyDto } from 'src/product/dto/product-policy.dto';
 
 @ApiTags('Admin')
 @Controller('admin')
