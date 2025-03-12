@@ -21,7 +21,6 @@ export class ProductService {
       // fetch from Lunchlab API !!!
       //TODO: refactor api call !!!!!!!!!!!!!!!!!!!!!!!!
       const response = await firstValueFrom(
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         this.httpService
           .get<ProductApiResponse>(
             'https://recruit-dev.lunchlab.me/v1/products',
@@ -37,8 +36,9 @@ export class ProductService {
       );
 
       // Extract the products array from the response
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+
       const products = response.data.data;
+      console.log('products:::', products);
 
       // Get user-specific policies
       const policies = await this.productPolicyModel.find({ userId });
