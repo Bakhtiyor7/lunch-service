@@ -33,7 +33,6 @@ export class ProductController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async getProducts(@Request() req) {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
       return this.productsService.getProducts(req?.user?.id);
     } catch (error: any) {
       this.logger.error(

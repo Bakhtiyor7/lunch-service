@@ -22,7 +22,6 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { ServiceException } from '../error/serviceException.error';
 
-// Define a type for the request with user property
 interface RequestWithUser extends Request {
   user: {
     id: string;
