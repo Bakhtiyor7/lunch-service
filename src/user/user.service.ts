@@ -12,6 +12,10 @@ export class UserService {
     return this.userModel.findOne({ username });
   }
 
+  async findAll() {
+    return this.userModel.find();
+  }
+
   async create(user: CreateUserDto) {
     const newUser = new this.userModel(user);
     return newUser.save();
