@@ -1,8 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { User } from 'src/user/schema/user.schema';
+import { OrderItem } from '../interfaces/order-item.interface';
 
-class OrderItem {
+@Schema()
+class OrderItemSchema {
   @Prop({ required: true })
   productId: number;
 
@@ -15,6 +17,8 @@ class OrderItem {
   @Prop({ required: true })
   amount: number;
 }
+
+const OrderItemSchemaDefinition = SchemaFactory.createForClass(OrderItemSchema);
 
 @Schema({ timestamps: true })
 export class Order extends Document {
@@ -30,7 +34,7 @@ export class Order extends Document {
   @Prop({ required: true })
   totalAmount: number;
 
-  @Prop({ type: [Object], required: true })
+  @Prop({ type: [OrderItemSchemaDefinition], required: true })
   items: OrderItem[];
 }
 
