@@ -8,6 +8,7 @@ import { UserService } from 'src/user/user.service';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
 import { CreateUserDto } from './dto/create-user.dto';
+import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
 const scrypt = promisify(_scrypt);
 
@@ -40,7 +41,7 @@ export class AuthService {
     return newUser;
   }
 
-  async signin(loginDto: CreateUserDto) {
+  async signin(loginDto: LoginDto) {
     const user = await this.userService.find(loginDto.username);
     if (!user) {
       throw new NotFoundException('User not found');
