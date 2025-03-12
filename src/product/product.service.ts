@@ -19,7 +19,7 @@ export class ProductService {
   async getProducts(userId: string) {
     try {
       // fetch from Lunchlab API !!!
-      //TODO: refactor api call !!!!!!!!!!!!!!!!!!!!!!!!
+      //TODO: refactor api calll !!!!!!!
       const response = await firstValueFrom(
         this.httpService
           .get<ProductApiResponse>(
