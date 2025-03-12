@@ -7,15 +7,19 @@ import {
   Logger,
   InternalServerErrorException,
   HttpException,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AdminService } from './admin.service';
 
 import { ServiceException } from 'src/error/serviceException.error';
 import { ProductPolicyDto } from 'src/product/dto/product-policy.dto';
+import { AdminGuard } from 'src/guards/admin-guard';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @ApiTags('Admin')
 @Controller('admin')
+@UseGuards(JwtAuthGuard, AdminGuard)
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
