@@ -4,12 +4,12 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import { UserService } from 'src/user/user.service';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { UserService } from 'src/user/user.service';
 const scrypt = promisify(_scrypt);
 
 @Injectable()
@@ -54,7 +54,6 @@ export class AuthService {
       throw new UnauthorizedException('Wrong credentials');
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const payload = { id: user.id, username: user.username };
     const token = this.jwtService.sign(payload);
     return { access_token: token };
